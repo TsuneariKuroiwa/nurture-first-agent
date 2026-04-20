@@ -1,0 +1,45 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node / bun
+node_modules/
+
+# Secrets (OAuth credentials etc.)
+**/gcp-oauth.keys.json
+**/*credentials*.json
+**/.env
+
+# Personal data — NEVER commit
+# Experiential logs contain daily judgments, emotions, and potentially sensitive context.
+experiential/*.md
+!experiential/README.md
+experiential/journal/
+experiential/cases/
+experiential/errors/
+experiential/review-decisions/
+
+# User profile (copy profile.TEMPLATE.md → profile.md and fill in locally)
+constitutional/profile.md
+
+# Personal memos, health records, etc.
+personal/
+
+# Runtime state (calendar sync cache etc.)
+state/
+
+# Claude Code local settings and transient worktrees
+.claude/settings.local.json
+.claude/worktrees/

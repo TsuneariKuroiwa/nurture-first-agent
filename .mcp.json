@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "gtasks": {
+      "command": "node",
+      "args": ["<PATH-TO>/mcp-servers/gtasks-mcp/dist/index.js"],
+      "cwd": "<PATH-TO>/mcp-servers/gtasks-mcp"
+    }
+  }
+}
