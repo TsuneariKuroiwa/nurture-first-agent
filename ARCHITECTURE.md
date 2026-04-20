@@ -118,7 +118,7 @@ Based on: "Nurture-First Agent Development" (arXiv:2603.10808)
 - **Google Drive** — ファイル検索・取得
 
 ローカルMCP も追加登録可能:
-- Claude Desktop の「設定 → Cowork → ローカルMCPサーバー」から、通常モードと同じ要領で
+- Claude Desktop の「ファイル → 設定 → 開発者 → 設定を編集」から、通常モードと同じ要領で
   gtasks-mcp 等を登録できる（Windows の場合 WSL 経由で bun 実体を呼ぶ形が典型）。
 
 ### 必須（Phase 0で導入）

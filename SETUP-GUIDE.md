@@ -9,8 +9,8 @@
 ### Coworkモードでの MCP 利用について
 
 以下のStep 1〜3（gtasks-mcp セットアップ）は **Claude Desktop（通常モード）または Claude Code** で行うのが標準。
-加えて Claude Desktop の Coworkモードでも、**設定 → Cowork → ローカルMCPサーバー → 設定を編集** から
-ローカルMCP（gtasks 含む）を登録できる（Windows の場合、WSL 経由で bun 実体を呼ぶ形が典型）。
+加えて Claude Desktop の Coworkモードでも、**ファイル → 設定 → 開発者 → 設定を編集** から
+ローカルMCPサーバー（gtasks 含む）を登録できる（Windows の場合、WSL 経由で bun 実体を呼ぶ形が典型）。
 
 また、Coworkモードではレジストリ接続済みの MCP として以下も利用可能:
 - Google Calendar

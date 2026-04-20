@@ -47,7 +47,7 @@
 - サンドボックスLinux VM上で動作
 - ドキュメント作成（docx, pptx, xlsx, pdf）が得意
 - レジストリ接続済みMCP: Google Calendar, Slack, Gmail, Google Drive
-- ローカルMCP（gtasks-mcp 等）も「設定 → Cowork → ローカルMCPサーバー」から登録可能
+- ローカルMCP（gtasks-mcp 等）も「ファイル → 設定 → 開発者 → 設定を編集」から登録可能
 - Git操作はサンドボックス内のみ（ユーザーのローカルリポジトリには直接触れない）
 
 ## Learned Patterns
