@@ -6,17 +6,17 @@
 
 ## Phase 0: Bootstrap
 
-### ⚠️ 注意: Coworkモードの制限
+### Coworkモードでの MCP 利用について
 
-以下のStep 1〜3（gtasks-mcpセットアップ）は **Claude Desktop（通常モード）またはClaude Code** で行う。
-Coworkモードではローカルmcpサーバーを起動できず、
-MCPレジストリにもGoogle Tasks用コネクタが存在しないため、gtasks-mcpは使えない。
+以下のStep 1〜3（gtasks-mcp セットアップ）は **Claude Desktop（通常モード）または Claude Code** で行うのが標準。
+加えて Claude Desktop の Coworkモードでも、**設定 → Cowork → ローカルMCPサーバー → 設定を編集** から
+ローカルMCP（gtasks 含む）を登録できる（Windows の場合、WSL 経由で bun 実体を呼ぶ形が典型）。
 
-Coworkモードでは代わりに以下のMCPが利用可能:
-- Google Calendar（接続済み）
-- Slack（接続済み）
-- Gmail（接続済み）
-- Google Drive（接続可能）
+また、Coworkモードではレジストリ接続済みの MCP として以下も利用可能:
+- Google Calendar
+- Slack
+- Gmail
+- Google Drive
 
 ---
 
@@ -179,7 +179,7 @@ clone-setup.sh が自動的に `~/.claude/CLAUDE.md` を配置する。
 
 ## Phase 0 完了チェックリスト
 
-- [ ] （任意）Google Tasks MCP が Claude Desktop で動く ※Coworkモードでは非対応
+- [ ] （任意）Google Tasks MCP が Claude Desktop（通常モード / Coworkモードの「ローカルMCPサーバー」）で動く
 - [ ] nurture-first-agent が GitHub リポジトリにある（private 推奨）
 - [ ] ローカルの `~/.claude/CLAUDE.md` が配置済み
 - [ ] `constitutional/profile.md` に自分のプロフィールが記入済み

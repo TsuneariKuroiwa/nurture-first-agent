@@ -10,7 +10,8 @@ Based on: "Nurture-First Agent Development" (arXiv:2603.10808)
 
 > **Note**: Google Tasks連携はすべての環境で利用可能。
 > - local: gtasks-mcp（ローカルMCPサーバー）経由
-> - cowork: レジストリMCP経由（Google Tasks/Calendar/Slack/Gmail/Drive等が接続済み）
+> - cowork: Claude Desktop の「ローカルMCPサーバー」設定から gtasks-mcp を登録するか、
+>   レジストリ接続済みの Calendar/Slack/Gmail/Drive 等を利用
 
 ## System Architecture
 
@@ -110,15 +111,18 @@ Based on: "Nurture-First Agent Development" (arXiv:2603.10808)
 ## MCP Server Stack
 
 ### CoworkモードのMCP
-Coworkモードで利用可能なMCP（接続済み）:
-- **Google Tasks** — タスク取得・作成・更新・削除・検索
+レジストリ接続済み:
 - **Google Calendar** — スケジュール管理・空き時間検索
 - **Slack** — メッセージ送受信・チャンネル検索
 - **Gmail** — メール検索・下書き作成
 - **Google Drive** — ファイル検索・取得
 
+ローカルMCP も追加登録可能:
+- Claude Desktop の「設定 → Cowork → ローカルMCPサーバー」から、通常モードと同じ要領で
+  gtasks-mcp 等を登録できる（Windows の場合 WSL 経由で bun 実体を呼ぶ形が典型）。
+
 ### 必須（Phase 0で導入）
-1. **gtasks-mcp** — Google Tasks取得・更新（Claude Desktop / Claude Code: ローカルMCP、Cowork: レジストリMCP）
+1. **gtasks-mcp** — Google Tasks取得・更新（Claude Desktop / Claude Code / Cowork のいずれもローカルMCP として登録可能）
 
 ### 推奨（Phase 1で導入）
 2. **ssh-mcp** — リモートマシンへのSSH接続
