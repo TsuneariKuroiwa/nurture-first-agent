@@ -125,7 +125,36 @@ cp ~/nurture-first-agent/constitutional/profile.TEMPLATE.md \
 
 ※ `profile.md` は `.gitignore` 推奨（個人情報のため）。
 
-### Step 7: Git リポジトリ化 & GitHub push（5分）
+### Step 7: スラッシュコマンドを配置（2分）
+
+`commands/` 配下の `.md` ファイルは Claude Code のユーザーレベル
+スラッシュコマンドとして使えるが、自動読み込みされる場所は
+`~/.claude/commands/` に限られるため、手動でコピーする。
+
+**Windows（PowerShell）**:
+```powershell
+mkdir ~\.claude\commands -ErrorAction SilentlyContinue
+copy ~\nurture-first-agent\commands\*.md ~\.claude\commands\
+```
+
+**Linux / macOS**:
+```bash
+mkdir -p ~/.claude/commands
+cp ~/nurture-first-agent/commands/*.md ~/.claude/commands/
+```
+
+これで以下が使えるようになる:
+- `/log <内容>` — その場の対話を経験ログに記録
+- `/sync` — `scripts/sync-all.sh` を実行して全環境を同期
+
+プロジェクトディレクトリ（`nurture-first-agent/`）で Claude Code
+を起動したときだけ使いたいコマンドは `.claude/commands/` 配下に置く
+（本リポでは `/crystallize` が既に設置済み）。
+
+独自コマンドを増やしたくなったら、`commands/<name>.md` に1ファイル
+追加 →（必要なら）`~/.claude/commands/` に再コピー、で完結する。
+
+### Step 8: Git リポジトリ化 & GitHub push（5分）
 
 ```bash
 cd ~/nurture-first-agent
@@ -135,7 +164,7 @@ git commit -m "bootstrap: Nurture-First Agent initial scaffolding (NFD Phase 0)"
 gh repo create <your-repo-name> --private --source=. --remote=origin --push
 ```
 
-### Step 8: リモート環境にセットアップ（各5分）
+### Step 9: リモート環境にセットアップ（各5分）
 
 各マシンにSSHして:
 ```bash
@@ -154,6 +183,7 @@ clone-setup.sh が自動的に `~/.claude/CLAUDE.md` を配置する。
 - [ ] nurture-first-agent が GitHub リポジトリにある（private 推奨）
 - [ ] ローカルの `~/.claude/CLAUDE.md` が配置済み
 - [ ] `constitutional/profile.md` に自分のプロフィールが記入済み
+- [ ] `~/.claude/commands/` に `/log` `/sync` が配置済み
 - [ ] 各リモート環境に `~/.claude/CLAUDE.md` 配置済み & リポジトリがクローン済み
 
 **確認方法**: 任意のプロジェクトディレクトリで `claude` を起動して
