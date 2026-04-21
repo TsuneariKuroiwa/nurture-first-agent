@@ -154,28 +154,29 @@ cp ~/nurture-first-agent/commands/*.md ~/.claude/commands/
 独自コマンドを増やしたくなったら、`commands/<name>.md` に1ファイル
 追加 →（必要なら）`~/.claude/commands/` に再コピー、で完結する。
 
-### Step 8: Agent Skills を配置（任意、3分）
+### Step 8: Agent Skills を `~/.claude/skills` からリンク（任意、1分）
 
-`agent-skills/` 配下には Office 系ファイル操作のユーザーレベル
-スキル（docx / xlsx / pptx / pdf）が同梱されている。これらを
-`~/.claude/skills/` に配置すると、どのプロジェクトでも Skill tool
-経由で呼び出せるようになる（Excel 編集・Word 報告書作成・PDF処理・
-PowerPoint スライド作成）。
+`.claude/skills/` 配下には Office 系ファイル操作のユーザーレベル
+Agent Skill（docx / xlsx / pptx / pdf）が同梱されている。
+`~/.claude/skills` がこのディレクトリを指すように junction / symlink を
+貼ると、どのプロジェクトから claude を起動しても Skill tool 経由で
+これらが使える（Excel 編集・Word 報告書作成・PDF処理・PowerPoint）。
 
-**Windows（PowerShell）**:
+git pull するたびに最新スキルが自動反映される利点もある。
+
+**Windows（PowerShell, 管理者権限不要）**:
 ```powershell
-mkdir ~\.claude\skills -ErrorAction SilentlyContinue
-xcopy ~\nurture-first-agent\agent-skills\* ~\.claude\skills\ /E /I /Y
+New-Item -ItemType Junction -Path "$HOME\.claude\skills" `
+                           -Target "$HOME\nurture-first-agent\.claude\skills"
 ```
 
 **Linux / macOS**:
 ```bash
-mkdir -p ~/.claude/skills
-cp -r ~/nurture-first-agent/agent-skills/* ~/.claude/skills/
+ln -s ~/nurture-first-agent/.claude/skills ~/.claude/skills
 ```
 
-既に同名スキルがある場合は上書きされるので、カスタマイズ版を
-残したい場合はバックアップを取ってから実行すること。
+既に `~/.claude/skills` が存在する場合は先に削除 or リネームする
+（中身をバックアップしたい場合は `mv ~/.claude/skills ~/.claude/skills.bak`）。
 
 ### Step 9: Git リポジトリ化 & GitHub push（5分）
 
