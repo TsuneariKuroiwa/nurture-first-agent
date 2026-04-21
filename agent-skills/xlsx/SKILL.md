@@ -26,6 +26,40 @@ description: "Excel(.xlsx)ファイルの作成・編集・分析を行うスキ
 |------|-----------|
 | データ分析・集計・可視化 | **pandas** |
 | 書式設定・数式・セル結合・テンプレート編集 | **openpyxl** |
+| **フォームコントロール（ラジオボタン・チェックボックス）を含む申請書等の編集** | **win32com.client**（Windowsのみ） |
+
+### ⚠️ フォームコントロール保持の落とし穴
+
+openpyxl で **フォームコントロール（ラジオボタン・チェックボックス・ActiveX コントロール）
+を含むファイルを読み書きすると、これらが消失する**。
+申請書・アンケート・評価シート等、コントロールが設計に組み込まれているテンプレートでは、
+openpyxl ではなく `win32com.client`（Excel COM オートメーション）を使う。
+
+```python
+# フォームコントロールを保ったまま編集する典型形（Windows）
+import win32com.client as win32
+
+excel = win32.gencache.EnsureDispatch('Excel.Application')
+excel.Visible = False
+wb = excel.Workbooks.Open(r'C:\path\to\form.xlsx')
+ws = wb.Worksheets('Sheet1')
+
+# セルに値を書き込む
+ws.Range('B5').Value = '申請者氏名'
+ws.Range('B6').Value = '2026-05-04'
+
+# チェックボックスの状態を変える（Shapes 経由）
+ws.Shapes('Check Box 1').ControlFormat.Value = 1  # 1=ON, -4146=OFF
+
+wb.Save()
+wb.Close()
+excel.Quit()
+```
+
+判断フロー:
+1. テンプレートを Excel で開いて開発タブのフォームコントロールがあるか目視確認
+2. ある → win32com 必須（openpyxl では保存時に消える）
+3. ない → 通常通り openpyxl でOK
 
 ---
 
