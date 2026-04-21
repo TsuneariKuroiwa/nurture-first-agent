@@ -154,7 +154,30 @@ cp ~/nurture-first-agent/commands/*.md ~/.claude/commands/
 独自コマンドを増やしたくなったら、`commands/<name>.md` に1ファイル
 追加 →（必要なら）`~/.claude/commands/` に再コピー、で完結する。
 
-### Step 8: Git リポジトリ化 & GitHub push（5分）
+### Step 8: Agent Skills を配置（任意、3分）
+
+`agent-skills/` 配下には Office 系ファイル操作のユーザーレベル
+スキル（docx / xlsx / pptx / pdf）が同梱されている。これらを
+`~/.claude/skills/` に配置すると、どのプロジェクトでも Skill tool
+経由で呼び出せるようになる（Excel 編集・Word 報告書作成・PDF処理・
+PowerPoint スライド作成）。
+
+**Windows（PowerShell）**:
+```powershell
+mkdir ~\.claude\skills -ErrorAction SilentlyContinue
+xcopy ~\nurture-first-agent\agent-skills\* ~\.claude\skills\ /E /I /Y
+```
+
+**Linux / macOS**:
+```bash
+mkdir -p ~/.claude/skills
+cp -r ~/nurture-first-agent/agent-skills/* ~/.claude/skills/
+```
+
+既に同名スキルがある場合は上書きされるので、カスタマイズ版を
+残したい場合はバックアップを取ってから実行すること。
+
+### Step 9: Git リポジトリ化 & GitHub push（5分）
 
 ```bash
 cd ~/nurture-first-agent
@@ -164,7 +187,7 @@ git commit -m "bootstrap: Nurture-First Agent initial scaffolding (NFD Phase 0)"
 gh repo create <your-repo-name> --private --source=. --remote=origin --push
 ```
 
-### Step 9: リモート環境にセットアップ（各5分）
+### Step 10: リモート環境にセットアップ（各5分）
 
 各マシンにSSHして:
 ```bash
@@ -184,6 +207,7 @@ clone-setup.sh が自動的に `~/.claude/CLAUDE.md` を配置する。
 - [ ] ローカルの `~/.claude/CLAUDE.md` が配置済み
 - [ ] `constitutional/profile.md` に自分のプロフィールが記入済み
 - [ ] `~/.claude/commands/` に `/log` `/sync` が配置済み
+- [ ] （任意）`~/.claude/skills/` に docx/xlsx/pptx/pdf の Agent Skills が配置済み
 - [ ] 各リモート環境に `~/.claude/CLAUDE.md` 配置済み & リポジトリがクローン済み
 
 **確認方法**: 任意のプロジェクトディレクトリで `claude` を起動して
